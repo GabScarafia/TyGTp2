@@ -1,3 +1,4 @@
+/*VER DESPUES*/
 html,
 body{
     height: 100%;
@@ -75,12 +76,6 @@ footer{
     margin-bottom: 4px;
     font-size: 18px;
 }
-.sublist-hidden{
-    display: none;
-}
-.sublist-shown{
-    font-size: 16px;
-}
 .clickable{
     cursor: pointer;
     width: max-content;
@@ -120,28 +115,6 @@ footer{
 .content-section p{
     padding: 4px;
 }
-#frase-0{
-    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
-}
-#frase-1{
-    text-shadow: 0 0 3px #00FF00, 0 0 5px #00FFFF;
-}
-#frase-2{
-    text-shadow: 0 0 3px #FFFF00, 0 0 5px #FFFFFF;
-}
-.img-rr{
-    min-width: 556px;
-    min-height: 370px;
-}
-.title-rr,
-.source-rr{
-    margin-left: 0!important;
-}
-.img-i{
-    display: none;
-    margin-top: 32px;
-    background-color: white!important;
-}
 .grey-card{
     display: flex;
     flex-direction: column;
@@ -151,64 +124,7 @@ footer{
     background-color: #E7E7E7;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.frase-dn{
-    display: none;
-}
-.form-i{
-    margin-left: auto;
-    margin-right: auto;
-}
-.form-i input{
-    width: 208px;
-}
-.user{
-    display: flex;
-    flex-direction: row;
-    margin-top: 16px;
-    padding: 16px;
-    background-color: #E7E7E7;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.user-data{
-    flex-direction: column;
-    flex: 1;
-    padding: 16px;
-}
-.user-data p{
-    border: 0;
-    background-color: transparent;
-}
-.avatar{
-    border: 0!important;
-    background-color: white!important;
-    box-shadow: none!important;
-    height: 250px;
-    width: 250px;
-}
-.full-name{
-    display: flex;
-    flex-direction: row;
-}
-.full-name h2{
-    flex: 0;
-    margin: 0;
-    margin-bottom: 16px;
-}
-.cat-card{
-    width: 320px;
-}
-.img-rc{
-    box-shadow: none!important;
-}
-.gif-estrellas{
-    display: flex;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 80px;
-    height: auto;
-    padding: 32px;
-}
+
 .footer-text{
     margin: 10px;
     float: right;
@@ -247,3 +163,33 @@ li {
     align-items: center;
     gap: 8px;
 }
+/* Clases destinadas a la seccion search */
+.md-searchbox {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .md-searchbox-input {
+    flex-grow: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+
+  .md-searchbox-button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .md-searchbox-button i {
+    font-size: 24px;
+  }

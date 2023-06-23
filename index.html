@@ -1,12 +1,59 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <header>TP2</header>
-    <main>DUMMY</main>
-    <footer></footer>
-  </body>
+<html lang="es">
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+        <title>TP2: Grupo 5</title>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <!-- <img class="clickable" src="https://www.icegif.com/wp-content/uploads/icegif-3792.gif"> -->
+            </div>
+            <h1>TP2: Grupo 5</h1>
+        </header>
+        <div class="main">
+            <div class="side-content">
+                <div class="sidebar">
+                  <nav>
+                    <ul>
+                        <li id="home" onclick="selectApiOperation(this.id)">
+                            <span class="material-symbols-outlined">home</span>
+                            <p>Home</p>
+                        </li>
+                        <li id="search" onclick="selectApiOperation(this.id)">
+                            <span class="material-symbols-outlined">search</span>
+                            <p>Cargar Datos</p>
+                        </li>
+                        <li id="recipes" onclick="selectApiOperation(this.id)">
+                            <span class="material-symbols-outlined">save</span>
+                            <p>Mostrar Datos</p>
+                        </li>
+                    </ul>
+                </nav>
+                </div>
+                <div class="content">
+                    <section id="home-section" class="content-section">
+                        <div class="grey-card">
+                          <p>Hola test, jhonny...</p>
+                        </div>
+                    </section>
+                    <section id="search-section" class="content-section" style="display: none;">
+                      a
+                    </section>
+                    <section id="recipes-section" class="content-section" style="display: none;">
+                      b
+                    </section>
+                    <!-- <div class="gif-estrellas">
+                        <img src="https://gifsanimados.de/img-gifsanimados.de/e/estrellas/estrellas-5.gif">
+                    </div> -->
+                </div>
+            </div>
+            <footer>
+                <p class="footer-text">Tecnología y Gestión Web, Mayo de 2023.</p>
+            </footer>
+        </div>
+        <script src="main.js"></script>
+    </body>
 </html>

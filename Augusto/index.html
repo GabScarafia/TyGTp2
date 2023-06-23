@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>TP1: Gonzalez, Augusto B.</title>
+    </head>
+    <body onload="selectRandomPhrase()">
+        <header>
+            <div class="logo">
+                <img class="clickable" onclick="showWelcomeSection()" src="https://www.icegif.com/wp-content/uploads/icegif-3792.gif">
+            </div>
+            <h1>TP1: González, Augusto B.</h1>
+        </header>
+        <div class="main">
+            <div class="side-content">
+                <div class="sidebar">
+                    <div class="sidebar-title">
+                        Menu
+                    </div>
+                    <ul>
+                        <li class="api-title">
+                            <a id="api1" class="clickable" onclick="selectApi(this.id)">
+                                Spoonacular API
+                            </a>
+                            <ul id="api1-sublist" class="sublist-hidden">
+                                <li>
+                                    <div id="api1a" class="clickable" onclick="selectApiOperation(this.id)">
+                                        Receta random
+                                    </div>
+                                </li>
+                                <li>
+                                    <div id="api1b" class="clickable" onclick="selectApiOperation(this.id)">
+                                        Buscar ingredientes
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="api-title">
+                            <a id="api2" class="clickable" onclick="selectApi(this.id)">
+                                Random Data API
+                            </a>
+                            <ul id="api2-sublist" class="sublist-hidden">
+                                <li>
+                                    <div id="api2a" class="clickable" onclick="selectApiOperation(this.id)">
+                                        Usuario random
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="api-title">
+                            <a id="api3" class="clickable" onclick="selectApi(this.id)">
+                                Cat Facts API
+                            </a>
+                            <ul id="api3-sublist" class="sublist-hidden">
+                                <li>
+                                    <div id="api3a" class="clickable" onclick="selectApiOperation(this.id)">
+                                        Dato random
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <section id="welcome" class="content-section">
+                        <div id="frase-0" class="grey-card frase">
+                            <p>Cuando Dios™ madruga, abre una ventana... 😔</p>
+                        </div>
+                        <div id="frase-1" class="grey-card frase-dn">
+                            <p>No dejes para mañana lo que por bien no venga... 😣</p>
+                        </div>
+                        <div id="frase-2" class="grey-card frase-dn">
+                            <p>Ante la duda, haz limonada... 🍋</p>
+                        </div>
+                        <div class="grey-card">
+                            <h2>Mi expectativa de la materia</h2>
+                            <p>De esta materia, yo espero aprender conceptos prácticos del desarrollo de páginas web y, por ahora, lo estoy logrando 😊</p>
+                        </div>
+                        <div class="grey-card">
+                            <h3>Texto de relleno</h3>
+                            <p>&emsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem nisi velit cupiditate nihil, inventore minima nobis aspernatur consequatur repudiandae debitis! Vitae in voluptatum omnis impedit unde a quam accusamus voluptates soluta hic ad obcaecati excepturi similique aperiam, officia quae rem inventore veniam dolorum commodi reprehenderit quidem ut facere expedita! Repudiandae sequi error aliquam placeat quos voluptatem saepe excepturi ducimus? Facere autem earum corrupti similique repellendus at ea cumque culpa id sint ab porro et quibusdam ipsam voluptas cum, itaque, saepe, ex facilis dolores omnis. Voluptatum illum iusto cum repellendus suscipit, architecto, delectus quas vero, repellat ipsam commodi totam laborum excepturi!</p>
+                            <p>&emsp;Obcaecati animi sit minima quae, atque, illo maiores distinctio, iste tempore reprehenderit porro. Itaque unde repellendus deserunt, illum repudiandae at maiores laborum qui, incidunt sapiente assumenda totam provident praesentium sint dolore aperiam inventore? Laborum corrupti ratione impedit maiores in nam expedita nemo necessitatibus ullam animi odit odio placeat minima id neque ab numquam, aspernatur incidunt repellat. Rem aliquam id sapiente dignissimos placeat rerum ratione dolorum provident illo, dicta mollitia accusantium velit voluptatem corporis fugiat eaque aperiam nihil iste, autem molestiae ab cupiditate sequi tenetur recusandae! Laborum voluptatum numquam provident tempora delectus cum quisquam incidunt tenetur. Hic, unde natus. Ut, porro!</p>
+                            <p>&emsp;Facere id tempora saepe quo repudiandae repellat vel unde labore aspernatur. Ratione, blanditiis at. Ipsa laborum consectetur illum dolore asperiores quos, fugiat nemo, ullam at magnam enim nulla aperiam illo repellat labore! Non officiis a illo dignissimos nostrum enim ipsa quaerat laborum minus explicabo soluta quam natus, unde quibusdam recusandae dicta consequuntur eos id aspernatur ut ipsum molestias, sint ratione magnam. Adipisci autem obcaecati aliquam fugiat sequi aut sed quaerat nam ipsa, minus accusantium nostrum expedita commodi eos, vitae, ab laboriosam iste cumque quis cupiditate. Perspiciatis quibusdam obcaecati dolorem id in quis, nulla voluptas corporis quidem, natus inventore sint explicabo!</p>
+                            <p>&emsp;Consectetur a earum impedit laboriosam voluptas animi itaque alias reiciendis tenetur adipisci odit error commodi facere iste id, explicabo similique vero, labore modi amet maxime ut dolores iusto! Voluptatem cum quos facilis perferendis nesciunt ducimus necessitatibus optio numquam ab dolores. Sapiente consequatur corrupti consectetur eaque nam. Animi rerum similique corporis quos! Dolorum nam ut illo molestiae rerum eum eos inventore laboriosam ad reiciendis, eveniet, in officiis expedita culpa, porro voluptas maiores fugiat cum assumenda. Natus eligendi quam assumenda eum at. Deserunt magnam sit expedita aperiam nobis, eligendi ratione veritatis tenetur, nostrum cum possimus quasi autem, animi dolor! Fugit, nesciunt similique.</p>
+                            <p>&emsp;Ipsum hic nobis soluta cum ut? Rem repudiandae ut facilis esse veniam nulla modi omnis! Vero totam deleniti quam neque, laborum at culpa nisi. Provident iste corporis, ad cumque delectus necessitatibus quia ea magni, unde tempore quas hic sed porro voluptate aliquid alias sunt tenetur quasi dolorem. Itaque obcaecati ea asperiores culpa explicabo. Perferendis possimus, accusantium impedit maxime dolore pariatur consectetur dolores eligendi molestias nisi porro quisquam atque vel. Veritatis et temporibus dolor, nostrum repudiandae animi rerum harum, mollitia dolores enim iste, quibusdam labore debitis? Perferendis aperiam suscipit facere voluptatum ex, exercitationem mollitia soluta earum quod aut quam, perspiciatis porro?</p>
+                            <p>&emsp;Eius quibusdam quae sequi tempora ratione illo. Labore, pariatur impedit molestiae velit, aliquid minima minus maiores mollitia ab delectus accusamus omnis, tempora esse cumque neque dignissimos odio quis placeat non exercitationem perferendis adipisci laudantium? Voluptas magni, molestias esse eum quis saepe consequuntur earum cumque dolorem debitis libero iste laudantium fugit at. Est odio voluptate possimus recusandae a atque minus eum ab neque saepe deleniti reprehenderit deserunt ipsum necessitatibus ut consequuntur optio iste nihil doloremque fugit natus velit, nemo tenetur? Obcaecati commodi dignissimos est dolores, ducimus veniam aspernatur possimus magni qui, vero veritatis vel delectus nihil. Dolorum modi nisi consequuntur officiis.</p>
+                            <p>&emsp;Iure odio cumque necessitatibus vero consectetur sint incidunt, fugiat vitae! Sequi alias in expedita laboriosam, quasi temporibus accusamus cum veniam. Voluptates quaerat quis inventore natus maxime fugiat vel doloremque rem, eum magni commodi, nobis dicta et beatae tenetur molestiae mollitia similique eius, aperiam nostrum. Cum aliquid necessitatibus, quos quisquam rem magni assumenda minus animi ipsa neque laborum nulla recusandae maiores. Corrupti, ea eligendi porro alias commodi ex. Maxime ipsa a, ea, pariatur facilis dignissimos labore quas voluptate ullam numquam quis cumque laboriosam dolor illum cupiditate veritatis cum. Aut, doloribus. Commodi totam dolor facilis? Architecto quas quam necessitatibus modi voluptates porro.</p>
+                            <p>&emsp;Dolore voluptatem doloribus nihil quidem tempore repellat rem. Modi unde dolore nisi molestias, pariatur necessitatibus magnam beatae error! Tempora, natus. Beatae facilis, itaque nulla aliquam quis minima culpa aut error ab voluptate, sequi possimus accusantium consequatur ut provident architecto ipsum iste maiores vero consequuntur alias. Illo quisquam qui minus suscipit cupiditate numquam sint facere, iusto facilis repellat id debitis magnam accusantium sequi dolores, eaque aperiam? Ipsam aliquid maiores eum ad incidunt velit soluta, inventore culpa. Quam nam ipsum id voluptas laboriosam, fugiat a culpa consectetur, modi dolore aliquam iure! Id quae qui excepturi veniam atque repellendus quisquam non rerum voluptatum.</p>
+                        </div>
+                    </section>
+                    <section id="api1a-section" class="content-section" style="display: none;">
+                        <img class="img-rr">
+                        <h2 class="title-rr"></h2>
+                        <p id="summary-rr"></p>
+                        <a class="source-rr"></a>
+                    </section>
+                    <section id="api1b-section" class="content-section" style="display: none;">
+                        <div class="grey-card">
+                            <p>Ingresar nombre de un ingrediente en inglés.</p>
+                            <form class="form-i">
+                                <input id="ingredient-query" type="text">
+                                <button type="submit">Buscar</button>
+                            </form>
+                        </div>
+                            <img class="img-i">
+                    </section>
+                    <section id="api2a-section" class="content-section" style="display: none;">
+                        <div class="user">
+                            <div class="user-data">
+                                <img class="avatar">
+                            </div>
+                            <div class="user-data">
+                                <div class="full-name">
+                                    <h2 id="first-name"></h2>
+                                    <h2 id="last-name"></h2>   
+                                </div>
+                                <p id="email"></p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="api3a-section" class="content-section" style="display: none;">
+                        <div class="grey-card cat-card">
+                            <img class="img-rc" src="https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/21/1464342455-typing-cat-gif.gif?resize=256:*">
+                            <p id="cat-fact"></p>
+                        </div>
+                    </section>
+                    <div class="gif-estrellas">
+                        <img src="https://gifsanimados.de/img-gifsanimados.de/e/estrellas/estrellas-5.gif">
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <p class="footer-text">Tecnología y Gestión Web, Mayo de 2023.</p>
+            </footer>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>

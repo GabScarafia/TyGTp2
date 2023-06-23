@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 16px 0px 16px;
+    border-bottom: 1px solid lightgray;
+    height: 64px;
+}
+
+section {
+    height: calc(100svh - 64px - 40px);
+    width: 100svw;
+}
+
+nav {
+    float: left;
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid lightgray;
+    padding: 20px;
+}
+
+article {
+    float: left;
+    padding: 16px;
+    width: calc(100svw - 200px);
+    height: 100%;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0px 16px 0px 16px;
+    border-top: 1px solid lightgray;
+    height: 40px;
+    width: 100vw;
+    color: gray;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.body1 {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.body2 {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+ul {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+li {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.color-gray {
+    color: gray;
+}
+
+.color-black {
+    color: black;
+}
+
+.phrase0 {
+    text-shadow: 2px 2px 2px red;
+}
+
+.phrase1 {
+    text-shadow: 4px 4px 4px green;
+}
+
+.phrase2 {
+    text-shadow: 8px 8px 8px blue;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48
+}

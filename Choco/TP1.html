@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es-ar">
+<head>
+    <title>TP1 - Matías Chocobar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="site.css">
+    <script src="site.js"></script>
+</head>
+    <body onload="managePage(0)">
+        <header>
+            <img src="./utn.png" alt="UTN" height="40" />
+            <div style="display: flex; flex-direction: column; align-items: center; flex-grow: 1;">
+                <h2 class="color-black">Matías Chocobar</h2>
+                <p class="color-gray"><strong>Trabajo práctico 1</strong></p>
+            </div>
+        </header>
+
+        <section>
+            <nav>
+                <ul>
+                    <li class="color-gray" onclick="managePage(0)">
+                        <span class="material-symbols-outlined">home</span>
+                        <p>Home</p>
+                    </li>
+                    <li class="color-gray" onclick="managePage(1)">
+                        <span class="material-symbols-outlined">pets</span>
+                        <p>Gatitos</p>
+                    </li>
+                    <li class="color-gray" onclick="managePage(2)">
+                        <span class="material-symbols-outlined">pet_supplies</span>
+                        <p>Perritos</p>
+                    </li>
+                </ul>
+            </nav>
+
+            <article id="home">
+                <h2>Frase del momento</h2>
+                <p id="phrase">Frase</p>
+
+                <h2 style="margin-top: 16px;">Expectativas de la materia</h2>
+                <p class="body1">Tengo conocimientos de desarrollo web, pero nunca usé JS o HTML puro y me gustaría verlo. Además tengo ganas de ver Docker. </p>
+            </article>
+
+            <article id="api1">
+                <h2>API 1: CATAAS</h2>
+                <p class="body1">El sitio <a href="https://cataas.com/" target="_blank">www.cataas.com</a> es un servicio en línea que proporciona imágenes de gatos de manera aleatoria y personalizada.</p>
+                <div style="margin-top: 16px; margin-bottom: 16px;">
+                    <input placeholder="Texto a ver en la foto" type="text" id="api1Field">
+                    <input type="button"
+                           value="Cambiar imagen"
+                           onClick="getCat()">
+                </div>
+                <img id="api1Img" height="400" alt="Acá va a aparecer un gato" />
+            </article>
+
+            <article id="api2">
+                <h2>API 2: Dog CEO</h2>
+                <p class="body1">El sitio <a href="https://dog.ceo/" target="_blank">www.dog.ceo</a> es un servicio en línea que proporciona imágenes de perros de manera aleatoria y personalizada.</p>
+                <div style="margin-top: 16px; margin-bottom: 16px;">
+                    <input type="button"
+                           value="Cambiar imagen"
+                           onClick="getDog()">
+                </div>
+                <img id="api2Img" height="400" alt="Acá va a aparecer un perro" />
+            </article>
+        </section>
+
+        <footer>
+            <p class="body2">Tecnología y Gestión Web 2023</p>
+        </footer>
+    </body>
+</html>

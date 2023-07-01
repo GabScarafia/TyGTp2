@@ -24,10 +24,12 @@
                         <li id="search" class="clickable" onclick="selectApiOperation(this.id)">
                             <span class="material-symbols-outlined">search</span>
                             <p>Cargar Datos</p>
+                            <!-- Fetch de la Api y Guardar en el Strapi -->
                         </li>
                         <li id="recipes" class="clickable" onclick="selectApiOperation(this.id)">
                             <span class="material-symbols-outlined">save</span>
                             <p>Mostrar Datos</p>
+                            <!-- Fetch del Strapi y Algo -->
                         </li>
                     </ul>
                 </div>
@@ -39,9 +41,9 @@
                     </section>
                     <section id="search-section" class="content-section" style="display: none;">
                       <div class="md-searchbox">
-                        <input type="text" class="md-searchbox-input" placeholder="Buscar">
-                        <button class="md-searchbox-button">
-                          <span class="material-symbols-outlined">search</span>
+                        <input  id="query-input" type="text" class="md-searchbox-input" placeholder="Buscar">
+                        <button class="md-searchbox-button" onclick="searchRecipesByQuery()">
+                          <span  class="material-symbols-outlined">search</span>
                         </button>
                       </div>
                     </section>

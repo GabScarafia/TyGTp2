@@ -19,3 +19,31 @@ function hideSections(){
         section.style.display = "none"
     }
 }
+
+class G5Recipe {
+    constructor(id, title, image, imageType) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.imageType = imageType;
+      }
+} 
+
+async function searchRecipesByQuery(){
+    var query = document.getElementById('query-input').innerHTML;
+    var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
+    .then(response => response.json())
+    .catch(error => {
+        console.error('Error al hacer la solicitud HTTP:', error);
+    });
+    const lRecipes = data.results.map(item => new G5Recipe(item));
+    console.log(lRecipes);
+}
+
+async function getRecipeInformation(recipeID){
+    const data = await fetch('https://api.spoonacular.com/recipes/' + recipeID + '/information' +'&apiKey='+ spoonacularKey)
+    .then(response => response.json())
+    .catch(error => {
+        console.error('Error al hacer la solicitud HTTP:', error);
+    });
+}

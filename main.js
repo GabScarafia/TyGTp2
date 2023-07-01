@@ -40,10 +40,12 @@ async function searchRecipesByQuery(){
     console.log(lRecipes);
 }
 
-async function getRecipeInformation(recipeID){
-    const data = await fetch('https://api.spoonacular.com/recipes/' + recipeID + '/information' +'&apiKey='+ spoonacularKey)
+
+async function getRecipeCard(recipeID){
+    const data = await fetch('https://api.spoonacular.com/recipes/' + recipeID + '/card&apiKey='+ spoonacularKey)
     .then(response => response.json())
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
+    const card = data.url
 }

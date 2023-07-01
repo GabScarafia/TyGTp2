@@ -1,5 +1,5 @@
 const spoonacularKey = "c133c754558c4409918494b340a64248"
-
+const strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MjUzMzQwLCJleHAiOjE2OTA4NDUzNDB9.oERsdIaePc2LU-c0Yv14Nr9ZZaVFjWbAnCjtGqaYWgY"
 function selectApiOperation(apiItem){
     hideSections()
     document.getElementById(apiItem + "-section").style.display = ""

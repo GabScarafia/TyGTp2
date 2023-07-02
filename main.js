@@ -4,7 +4,7 @@ const strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4
 
 class G5Recipe {
     constructor(recipeData) {
-        this.recipeId = recipeData.id;
+        this.id = recipeData.id;
         this.title = recipeData.title;
         this.image = recipeData.image;
         this.imageType = recipeData.imageType;
@@ -38,22 +38,6 @@ function hideSections(){
     }
 }
 
-// class G5Recipe {
-//     constructor(recipeData) {
-//         this.recipeId = recipeData.id;
-//         this.title = recipeData.title;
-//         this.image = recipeData.image;
-//         this.imageType = recipeData.imageType;
-//         this.type = recipeData.type;
-//       }
-// } 
-// const TypeFood = {
-//     vegan: "vegan",
-//     vegetarian: "vegetarian",
-//     //normal: "normal" ahre forro
-//     omnivore: "omnivore",
-// }
-
 async function searchRecipesByQuery(){
     const searchSection = document.getElementById("search-section")
     const previousSearchResults = searchSection.querySelectorAll(".search-result")
@@ -77,6 +61,7 @@ async function searchRecipesByQuery(){
     //     recipe.type = newData
     // } 
     //const lRecipes = data.results.map(item => new G5Recipe(item));
+    //ESTO ES LA PRUEBA
     const lRecipes = [{
                         "id":782585,
                         "title":"Cannellini Bean and Asparagus Salad with Mushrooms",
@@ -140,27 +125,28 @@ async function searchRecipesByQuery(){
         image.width = '160';
         container.appendChild(image);
 
-        // Crear el contenedor de texto y botón
+        // Crear el contenedor de texto y botï¿½n
         var textContainer = document.createElement('div');
         textContainer.style.display = 'flex';
         textContainer.style.flexDirection = 'column';
         textContainer.style.justifyContent = 'space-between';
         textContainer.style.width = '100%';
 
-        // Crear el párrafo
+        // Crear el pï¿½rrafo
         var paragraph = document.createElement('p');
         paragraph.style.fontSize = '1.5rem';
         paragraph.textContent = lRecipes[i].title;
         textContainer.appendChild(paragraph);
 
-        // Crear el botón
+        // Crear el botï¿½n
         var button = document.createElement('button');
+        
         button.className = 'md-searchbox-button-text';
         button.style.alignSelf = 'end';
         button.innerHTML = '<span class="material-symbols-outlined" style="margin-right: 4px;">save</span><span>Guardar</span>';
         textContainer.appendChild(button);
 
-        // Agregar el contenedor de texto y botón al contenedor principal
+        // Agregar el contenedor de texto y botï¿½n al contenedor principal
         container.appendChild(textContainer);
 
         // Agregar el contenedor principal al elemento padre
@@ -168,18 +154,40 @@ async function searchRecipesByQuery(){
     }
 }
 
-async function getRecipeInformation(recipeID){
+async function saveData(recipe){
+    console.log(recipe.id)
+    //jsonRecipe = JSON.parse(recipe);
+    const elBody ={
+        "data" : recipe
+    } 
+    const bodyJson = JSON.stringify(elBody);
+    // console.log(json);
+    fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + strapiKey,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+
+        },
+         body: bodyJson,     
+    }).then(response => response.json())
+    .then(response => console.log(JSON.stringify(response)))
+
+}
+
+async function getRecipeInformation(id){
     /* NOTA PARA EL FUTURO: esta funcion tarda una banda porque tiene que esperar todos los datos, 
     asi que conviene buscar los datos despues de que el usuario decide guardar la receta. Por ahora
     lo dejo asi para no complicarme pero bueno vemos */
-    /* var data = await fetch('https://api.spoonacular.com/recipes/'+ recipeID +'/information?apiKey='+ spoonacularKey)
+    /* var data = await fetch('https://api.spoonacular.com/recipes/'+ id +'/information?apiKey='+ spoonacularKey)
     .then(response => response.json())
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
         if (data.code == 402) {
         spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
-        newData = getRecipeInformation(recipeID)
+        newData = getRecipeInformation(id)
         return newData
     }
     var newData = new Object()

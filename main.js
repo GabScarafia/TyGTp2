@@ -5,10 +5,8 @@ function selectApiOperation(apiItem){
     document.getElementById(apiItem + "-section").style.display = ""
     switch (apiItem){
         case "search":
-            getRandomRecipe()
             break
         case "recipes":
-            getRandomUser()
             break
     }
 }
@@ -21,11 +19,13 @@ function hideSections(){
 }
 
 class G5Recipe {
-    constructor(id, title, image, imageType) {
-        this.id = id;
-        this.title = title;
-        this.image = image;
-        this.imageType = imageType;
+    constructor(recipeData) {
+        this.recipeId = recipeData.id;
+        this.title = recipeData.title;
+        this.image = recipeData.image;
+        this.imageType = recipeData.imageType;
+        this.vegetarian = recipeData.vegetarian;
+        this.vegan = recipeData.vegan;
       }
 } 
 
@@ -36,16 +36,29 @@ async function searchRecipesByQuery(){
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
+    for (let i = 0; i < data.results.length; i++){
+        var recipe = data.results[i]
+        const newData = await getRecipeInformation(recipe.id)
+        recipe.vegetarian = newData.vegetarian
+        recipe.vegan = newData.vegan
+    } 
     const lRecipes = data.results.map(item => new G5Recipe(item));
     console.log(lRecipes);
 }
 
-
-async function getRecipeCard(recipeID){
-    const data = await fetch('https://api.spoonacular.com/recipes/' + recipeID + '/card&apiKey='+ spoonacularKey)
+async function getRecipeInformation(recipeID){
+    /* NOTA PARA EL FUTURO: esta funcion tarda una banda porque tiene que esperar todos los datos, 
+    asi que conviene buscar los datos despues de que el usuario decide guardar la receta. Por ahora
+    lo dejo asi para no complicarme pero bueno vemos */
+    var data = await fetch('https://api.spoonacular.com/recipes/'+ recipeID +'/information?apiKey='+ spoonacularKey)
     .then(response => response.json())
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
-    const card = data.url
+    var newData = new Object()
+    newData.vegetarian = data.vegetarian
+    newData.vegan = data.vegan
+    return newData
 }
+
+//apiKey=c133c754558c4409918494b340a64248 para probar

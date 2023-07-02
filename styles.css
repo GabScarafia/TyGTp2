@@ -29,6 +29,7 @@ ul{
     margin: 0;
     padding: 16px;
     list-style-type: none;
+    position: fixed;
 }
 p{
     margin-top: 0;

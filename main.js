@@ -1,5 +1,25 @@
+//import { G5Recipe, TypeFood } from "./classes"
 var spoonacularKey = "c133c754558c4409918494b340a64248"
 const strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MjUzMzQwLCJleHAiOjE2OTA4NDUzNDB9.oERsdIaePc2LU-c0Yv14Nr9ZZaVFjWbAnCjtGqaYWgY"
+
+class G5Recipe {
+    constructor(recipeData) {
+        this.recipeId = recipeData.id;
+        this.title = recipeData.title;
+        this.image = recipeData.image;
+        this.imageType = recipeData.imageType;
+        this.type = recipeData.type;
+      }
+}  
+
+const TypeFood = {
+    vegan: "vegan",
+    vegetarian: "vegetarian",
+    //normal: "normal" ahre forro
+    other: "other",
+}
+
+
 function selectApiOperation(apiItem){
     hideSections()
     document.getElementById(apiItem + "-section").style.display = ""
@@ -18,16 +38,21 @@ function hideSections(){
     }
 }
 
-class G5Recipe {
-    constructor(recipeData) {
-        this.recipeId = recipeData.id;
-        this.title = recipeData.title;
-        this.image = recipeData.image;
-        this.imageType = recipeData.imageType;
-        this.vegetarian = recipeData.vegetarian;
-        this.vegan = recipeData.vegan;
-      }
-} 
+// class G5Recipe {
+//     constructor(recipeData) {
+//         this.recipeId = recipeData.id;
+//         this.title = recipeData.title;
+//         this.image = recipeData.image;
+//         this.imageType = recipeData.imageType;
+//         this.type = recipeData.type;
+//       }
+// } 
+// const TypeFood = {
+//     vegan: "vegan",
+//     vegetarian: "vegetarian",
+//     //normal: "normal" ahre forro
+//     omnivore: "omnivore",
+// }
 
 async function searchRecipesByQuery(){
     const searchSection = document.getElementById("search-section")
@@ -36,23 +61,35 @@ async function searchRecipesByQuery(){
         element.remove()
     })
     var query = document.getElementById('query-input').innerHTML;
-    var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
-    .then(response => response.json())
-    .catch(error => {
-        console.error('Error al hacer la solicitud HTTP:', error);
-    });
-    if (data.code == 402) {
-        spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
-        searchRecipesByQuery()
-        return
-    }
-    for (let i = 0; i < data.results.length; i++){
-        var recipe = data.results[i]
-        const newData = await getRecipeInformation(recipe.id)
-        recipe.vegetarian = newData.vegetarian
-        recipe.vegan = newData.vegan
-    } 
-    const lRecipes = data.results.map(item => new G5Recipe(item));
+    // var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
+    // .then(response => response.json())
+    // .catch(error => {
+    //     console.error('Error al hacer la solicitud HTTP:', error);
+    // });
+    // if (data.code == 402) {
+    //     spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
+    //     searchRecipesByQuery()
+    //     return
+    // }
+    // for (let i = 0; i < data.results.length; i++){
+    //     var recipe = data.results[i]
+    //     const newData = await getRecipeInformation(recipe.id)
+    //     recipe.type = newData
+    // } 
+    //const lRecipes = data.results.map(item => new G5Recipe(item));
+    const lRecipes = [{
+                        "id":782585,
+                        "title":"Cannellini Bean and Asparagus Salad with Mushrooms",
+                        "image":"https://spoonacular.com/recipeImages/782585-312x231.jpg",
+                        "imageType":"jpg"
+                        },
+                        {
+                            "id":716426,
+                            "title":"Cauliflower, Brown Rice, and Vegetable Fried Rice",
+                            "image":"https://spoonacular.com/recipeImages/716426-312x231.jpg",
+                            "imageType":"jpg"
+                        }]
+                        
     console.log(lRecipes);
     if (lRecipes.length == 0) {
         const message = document.createElement("h3")
@@ -62,11 +99,29 @@ async function searchRecipesByQuery(){
         return
     }
     for (let i = 0; i < lRecipes.length; i++){
-        const title = document.createElement("h3")
-        const titleText = document.createTextNode(lRecipes[i].title)
-        title.appendChild(titleText)
-        title.classList.add("search-result")
-        searchSection.appendChild(title)
+        const itemContainer = document.createElement("div");
+        itemContainer.classList.add("result-item-container")
+        const itemImage = document.createElement('img');
+
+        itemImage.setAttribute('src', lRecipes[i].image);
+        //itemImage.setAttribute('alt', 'Recipe Image');
+
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add("result-item-div");
+        //title
+        const itemTitle = document.createElement('h2');
+        itemTitle.textContent = lRecipes[i].title;
+        //boton
+        const itemButton = document.createElement("button");
+        const itemButtonSpan = document.createElement("span");
+        itemButtonSpan.classList.add("material-symbols-outlined");
+        itemButtonSpan.innerHTML = "save";
+        itemButton.appendChild(itemButtonSpan);
+        itemContainer.appendChild(itemImage);
+        itemContainer.appendChild(itemDiv);
+        itemDiv.appendChild(itemTitle);
+        itemDiv.appendChild(itemButton);
+        searchSection.appendChild(itemContainer)
     }
 }
 
@@ -89,8 +144,7 @@ async function getRecipeInformation(recipeID){
     newData.vegan = data.vegan */
     // COMENTO TODO PARA NO LLAMAR A LA API MIL VECES MIENTRAS PROBAMOS
     var newData = new Object()
-    newData.vegetarian = true
-    newData.vegan = false
+    newData.type = TypeFood.vegetarian
     return newData
 }
 

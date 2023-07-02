@@ -186,3 +186,15 @@ li {
   .md-searchbox-button i {
     font-size: 24px;
   }
+  /* Estas son las clases del resultado de la query */
+  .result-item-container
+  {
+    display: flex;
+    flex-direction: row;
+
+  }
+  .result-item-div
+  {
+    display: flex;
+    flex-direction: column;
+  }

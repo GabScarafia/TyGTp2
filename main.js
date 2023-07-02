@@ -1,6 +1,7 @@
 //import { G5Recipe, TypeFood } from "./classes"
 var spoonacularKey = "c133c754558c4409918494b340a64248"
-const strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MjUzMzQwLCJleHAiOjE2OTA4NDUzNDB9.oERsdIaePc2LU-c0Yv14Nr9ZZaVFjWbAnCjtGqaYWgY"
+//HACER STRAPIKEY dinamico (OSEA SIEMPRE UN FETCH DE ESTO)
+const strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MzM4OTQ5LCJleHAiOjE2OTA5MzA5NDl9.rquKZ1LK5qIUQfci3-Uvi2qdCB5aDpia5W_rmPfeze8"
 
 class G5Recipe {
     constructor(recipeData) {
@@ -44,73 +45,49 @@ async function searchRecipesByQuery(){
     previousSearchResults.forEach(element => {
         element.remove()
     })
-    var query = document.getElementById('query-input').innerHTML;
-    // var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
-    // .then(response => response.json())
-    // .catch(error => {
-    //     console.error('Error al hacer la solicitud HTTP:', error);
-    // });
-    // if (data.code == 402) {
-    //     spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
-    //     searchRecipesByQuery()
-    //     return
-    // }
-    // for (let i = 0; i < data.results.length; i++){
-    //     var recipe = data.results[i]
-    //     const newData = await getRecipeInformation(recipe.id)
-    //     recipe.type = newData
-    // } 
-    //const lRecipes = data.results.map(item => new G5Recipe(item));
+    var query = document.getElementById('query-input').value;
+    console.log(query)
+    //ESTO ANDA
+    var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
+    .then(response => response.json())
+    .catch(error => {
+        console.error('Error al hacer la solicitud HTTP:', error);
+    });
+    if (data.code == 402) {
+        spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
+        searchRecipesByQuery()
+        return
+    }
+    for (let i = 0; i < data.results.length; i++){
+        var recipe = data.results[i]
+        const newData = await getRecipeInformation(recipe.id)
+        recipe.type = newData
+    } 
+    const lRecipes = data.results.map(item => new G5Recipe(item));
     //ESTO ES LA PRUEBA
-    const lRecipes = [{
-                        "id":782585,
-                        "title":"Cannellini Bean and Asparagus Salad with Mushrooms",
-                        "image":"https://spoonacular.com/recipeImages/782585-312x231.jpg",
-                        "imageType":"jpg"
-                        },
-                        {
-                            "id":716426,
-                            "title":"Cauliflower, Brown Rice, and Vegetable Fried Rice",
-                            "image":"https://spoonacular.com/recipeImages/716426-312x231.jpg",
-                            "imageType":"jpg"
-                        }]
+    // const lRecipes = [{
+    //                     "id":782585,
+    //                     "title":"Cannellini Bean and Asparagus Salad with Mushrooms",
+    //                     "image":"https://spoonacular.com/recipeImages/782585-312x231.jpg",
+    //                     "imageType":"jpg"
+    //                     },
+    //                     {
+    //                         "id":716426,
+    //                         "title":"Cauliflower, Brown Rice, and Vegetable Fried Rice",
+    //                         "image":"https://spoonacular.com/recipeImages/716426-312x231.jpg",
+    //                         "imageType":"jpg"
+    //                     }]
                         
-    console.log(lRecipes);
+    // console.log(lRecipes);
     if (lRecipes.length == 0) {
         const message = document.createElement("h3")
+        message.className = "search-result";
         const messageText = document.createTextNode("No se encontraron resultados :(")
         message.appendChild(messageText)
         searchSection.appendChild(message)
         return
     }
     for (let i = 0; i < lRecipes.length; i++){
-        //const itemContainer = document.createElement("div");
-        
-        //itemContainer.classList.add("result-item-container");
-        //const itemImage = document.createElement('img');
-        //const test = document.getElementById("test-imagen")
-
-        //itemImage.setAttribute('src', lRecipes[i].image);
-        //test.setAttribute('src', lRecipes[i].image);
-        ////itemImage.setAttribute('alt', 'Recipe Image');
-
-        //const itemDiv = document.createElement('div');
-        //itemDiv.classList.add("result-item-div");
-        ////title
-        //const itemTitle = document.createElement('h2');
-        //itemTitle.textContent = lRecipes[i].title;
-        ////boton
-        //const itemButton = document.createElement("button");
-        //const itemButtonSpan = document.createElement("span");
-        //itemButtonSpan.classList.add("material-symbols-outlined");
-        //itemButtonSpan.innerHTML = "save";
-        //itemButton.appendChild(itemButtonSpan);
-        //itemContainer.appendChild(itemImage);
-        //itemContainer.appendChild(itemDiv);
-        //itemDiv.appendChild(itemTitle);
-        //itemDiv.appendChild(itemButton);
-        //searchSection.appendChild(itemContainer)
-
         // Crear el contenedor principal
         var container = document.createElement('div');
         container.style.display = 'flex';
@@ -140,10 +117,15 @@ async function searchRecipesByQuery(){
 
         // Crear el bot�n
         var button = document.createElement('button');
-        
+        button.id = lRecipes[i].id;
         button.className = 'md-searchbox-button-text';
         button.style.alignSelf = 'end';
         button.innerHTML = '<span class="material-symbols-outlined" style="margin-right: 4px;">save</span><span>Guardar</span>';
+        button.onclick = async function(){
+            await saveData(lRecipes[i]);
+            
+            return false;
+          };
         textContainer.appendChild(button);
 
         // Agregar el contenedor de texto y bot�n al contenedor principal
@@ -155,48 +137,58 @@ async function searchRecipesByQuery(){
 }
 
 async function saveData(recipe){
-    console.log(recipe.id)
-    //jsonRecipe = JSON.parse(recipe);
-    const elBody ={
-        "data" : recipe
-    } 
-    const bodyJson = JSON.stringify(elBody);
-    // console.log(json);
-    fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes', {
-        method: 'POST',
+   var query = await fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes/' + recipe.id, {
+        method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + strapiKey,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
 
-        },
-         body: bodyJson,     
-    }).then(response => response.json())
-    .then(response => console.log(JSON.stringify(response)))
+        } 
+    }).then(response => response.json()).catch(msg => msg.data.json())
 
+    if(query.data){
+    }
+    else{
+        //TODO ESTO ES SI NO EXISTE EN EL STRAPI
+        recipe.type = await getRecipeInformation(recipe.id)
+        const elBody ={
+            "data" : recipe
+        } 
+        const bodyJson = JSON.stringify(elBody);
+        // console.log(json);
+        fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + strapiKey,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+
+            },
+             body: bodyJson,     
+        }).then(response => response.json())
+    }
+    button = document.getElementById(recipe.id);
+    button.innerHTML = '<span class="material-symbols-outlined" style="margin-right: 4px;">done</span><span>Guardado</span>';
 }
 
 async function getRecipeInformation(id){
-    /* NOTA PARA EL FUTURO: esta funcion tarda una banda porque tiene que esperar todos los datos, 
-    asi que conviene buscar los datos despues de que el usuario decide guardar la receta. Por ahora
-    lo dejo asi para no complicarme pero bueno vemos */
-    /* var data = await fetch('https://api.spoonacular.com/recipes/'+ id +'/information?apiKey='+ spoonacularKey)
+    var data = await fetch('https://api.spoonacular.com/recipes/'+ id +'/information?apiKey='+ spoonacularKey)
     .then(response => response.json())
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
-        if (data.code == 402) {
+    if (data.code == 402) {
         spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
         newData = getRecipeInformation(id)
         return newData
     }
-    var newData = new Object()
-    newData.vegetarian = data.vegetarian
-    newData.vegan = data.vegan */
-    // COMENTO TODO PARA NO LLAMAR A LA API MIL VECES MIENTRAS PROBAMOS
-    var newData = new Object()
-    newData.type = TypeFood.vegetarian
-    return newData
+    if(data.vegan)
+    {
+        return TypeFood.vegan
+    } 
+    if(data.vegetarian){
+        return TypeFood.vegetarian
+    }
+    return TypeFood.other
 }
-
-//apiKey=c133c754558c4409918494b340a64248 apiKey=b3d8248260a64af4aa63ffb4b7c2b2e3

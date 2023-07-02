@@ -30,6 +30,11 @@ class G5Recipe {
 } 
 
 async function searchRecipesByQuery(){
+    const searchSection = document.getElementById("search-section")
+    const previousSearchResults = searchSection.querySelectorAll(".search-result")
+    previousSearchResults.forEach(element => {
+        element.remove()
+    })
     var query = document.getElementById('query-input').innerHTML;
     var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
     .then(response => response.json())
@@ -49,7 +54,6 @@ async function searchRecipesByQuery(){
     } 
     const lRecipes = data.results.map(item => new G5Recipe(item));
     console.log(lRecipes);
-    const searchSection = document.getElementById("search-section")
     if (lRecipes.length == 0) {
         const message = document.createElement("h3")
         const messageText = document.createTextNode("No se encontraron resultados :(")
@@ -58,10 +62,10 @@ async function searchRecipesByQuery(){
         return
     }
     for (let i = 0; i < lRecipes.length; i++){
-        console.log(lRecipes[i])
         const title = document.createElement("h3")
         const titleText = document.createTextNode(lRecipes[i].title)
         title.appendChild(titleText)
+        title.classList.add("search-result")
         searchSection.appendChild(title)
     }
 }

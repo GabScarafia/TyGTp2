@@ -99,7 +99,7 @@ footer{
     margin-bottom: 16px;
     padding: 0;
 }
-.content-section img,
+/*.content-section img,
 .content-section h2,
 .content-section p,
 .content-section a{
@@ -118,7 +118,7 @@ footer{
 }
 .content-section p{
     padding: 4px;
-}
+}*/
 .grey-card{
     display: flex;
     flex-direction: column;
@@ -186,6 +186,24 @@ li {
   .md-searchbox-button i {
     font-size: 24px;
   }
+
+.md-searchbox-button-text {
+    color: #00843C;
+    border: none;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 8px;
+
+    margin-top: 4px;
+    
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
   /* Estas son las clases del resultado de la query */
   .result-item-container
   {

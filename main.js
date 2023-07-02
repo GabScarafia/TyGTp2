@@ -99,29 +99,72 @@ async function searchRecipesByQuery(){
         return
     }
     for (let i = 0; i < lRecipes.length; i++){
-        const itemContainer = document.createElement("div");
-        itemContainer.classList.add("result-item-container")
-        const itemImage = document.createElement('img');
+        //const itemContainer = document.createElement("div");
+        
+        //itemContainer.classList.add("result-item-container");
+        //const itemImage = document.createElement('img');
+        //const test = document.getElementById("test-imagen")
 
-        itemImage.setAttribute('src', lRecipes[i].image);
-        //itemImage.setAttribute('alt', 'Recipe Image');
+        //itemImage.setAttribute('src', lRecipes[i].image);
+        //test.setAttribute('src', lRecipes[i].image);
+        ////itemImage.setAttribute('alt', 'Recipe Image');
 
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add("result-item-div");
-        //title
-        const itemTitle = document.createElement('h2');
-        itemTitle.textContent = lRecipes[i].title;
-        //boton
-        const itemButton = document.createElement("button");
-        const itemButtonSpan = document.createElement("span");
-        itemButtonSpan.classList.add("material-symbols-outlined");
-        itemButtonSpan.innerHTML = "save";
-        itemButton.appendChild(itemButtonSpan);
-        itemContainer.appendChild(itemImage);
-        itemContainer.appendChild(itemDiv);
-        itemDiv.appendChild(itemTitle);
-        itemDiv.appendChild(itemButton);
-        searchSection.appendChild(itemContainer)
+        //const itemDiv = document.createElement('div');
+        //itemDiv.classList.add("result-item-div");
+        ////title
+        //const itemTitle = document.createElement('h2');
+        //itemTitle.textContent = lRecipes[i].title;
+        ////boton
+        //const itemButton = document.createElement("button");
+        //const itemButtonSpan = document.createElement("span");
+        //itemButtonSpan.classList.add("material-symbols-outlined");
+        //itemButtonSpan.innerHTML = "save";
+        //itemButton.appendChild(itemButtonSpan);
+        //itemContainer.appendChild(itemImage);
+        //itemContainer.appendChild(itemDiv);
+        //itemDiv.appendChild(itemTitle);
+        //itemDiv.appendChild(itemButton);
+        //searchSection.appendChild(itemContainer)
+
+        // Crear el contenedor principal
+        var container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.margin = '16px';
+        container.style.gap = '8px';
+        container.style.width = '800px';
+
+        // Crear la imagen
+        var image = document.createElement('img');
+        image.src = lRecipes[i].image;
+        image.alt = 'Foto';
+        image.width = '160';
+        container.appendChild(image);
+
+        // Crear el contenedor de texto y botón
+        var textContainer = document.createElement('div');
+        textContainer.style.display = 'flex';
+        textContainer.style.flexDirection = 'column';
+        textContainer.style.justifyContent = 'space-between';
+        textContainer.style.width = '100%';
+
+        // Crear el párrafo
+        var paragraph = document.createElement('p');
+        paragraph.style.fontSize = '1.5rem';
+        paragraph.textContent = lRecipes[i].title;
+        textContainer.appendChild(paragraph);
+
+        // Crear el botón
+        var button = document.createElement('button');
+        button.className = 'md-searchbox-button-text';
+        button.style.alignSelf = 'end';
+        button.innerHTML = '<span class="material-symbols-outlined" style="margin-right: 4px;">save</span><span>Guardar</span>';
+        textContainer.appendChild(button);
+
+        // Agregar el contenedor de texto y botón al contenedor principal
+        container.appendChild(textContainer);
+
+        // Agregar el contenedor principal al elemento padre
+        searchSection.appendChild(container);
     }
 }
 

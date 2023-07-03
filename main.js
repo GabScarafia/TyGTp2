@@ -1,5 +1,5 @@
 
-var spoonacularKey = ["c133c754558c4409918494b340a64248", "b3d8248260a64af4aa63ffb4b7c2b2e3"]
+var spoonacularKey = ["c133c754558c4409918494b340a64248", "b3d8248260a64af4aa63ffb4b7c2b2e3", "81ddf4b7c36747c09538f797e584694b"]
 var strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MzM4OTQ5LCJleHAiOjE2OTA5MzA5NDl9.rquKZ1LK5qIUQfci3-Uvi2qdCB5aDpia5W_rmPfeze8"
 
 

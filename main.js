@@ -60,6 +60,12 @@ function hideSections(){
     }
 }
 
+function handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      searchRecipesByQuery();
+    }
+  }
+
 async function searchRecipesByQuery() {
     //Pantalla de carga y pantalla "sin resultados"
     const loadingScreen = document.getElementById("search-loading");

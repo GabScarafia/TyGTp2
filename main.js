@@ -70,8 +70,10 @@ async function searchRecipesByQuery() {
     //Pantalla de carga y pantalla "sin resultados"
     const loadingScreen = document.getElementById("search-loading");
     const noResultsScreen = document.getElementById("no-results");
+    const noRequestsScreen = document.getElementById("no-requests");
     loadingScreen.className = "d-none";
     noResultsScreen.className = "d-none";
+    noRequestsScreen.className = "d-none";
 
     const searchSection = document.getElementById("search-section")
     const previousSearchResults = searchSection.querySelectorAll(".search-result")
@@ -90,6 +92,7 @@ async function searchRecipesByQuery() {
     loadingScreen.className = "d-none";
     if (data.code == 402) {
         if (spoonacularKey.length == 1) {
+            noRequestsScreen.className = "d-flex";
             console.log("Se acabaron las requests a la API :(")
             return
         }

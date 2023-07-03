@@ -217,3 +217,12 @@ li {
     display: flex;
     flex-direction: column;
   }
+
+/*Para mostrar/ocultar pantalla de carga y "No se hallaron resultados"*/
+.d-flex {
+    display: flex;
+}
+
+.d-none {
+    display: none;
+}

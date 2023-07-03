@@ -1,5 +1,5 @@
 
-var spoonacularKey = "c133c754558c4409918494b340a64248"
+var spoonacularKey = ["c133c754558c4409918494b340a64248", "b3d8248260a64af4aa63ffb4b7c2b2e3"]
 var strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MzM4OTQ5LCJleHAiOjE2OTA5MzA5NDl9.rquKZ1LK5qIUQfci3-Uvi2qdCB5aDpia5W_rmPfeze8"
 
 
@@ -76,14 +76,18 @@ async function searchRecipesByQuery() {
     console.log(query)
     //ESTO ANDA
     loadingScreen.className = "d-flex";
-    var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
+    var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey.at(-1))
     .then(response => response.json())
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
     loadingScreen.className = "d-none";
     if (data.code == 402) {
-        spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
+        if (spoonacularKey.length == 1) {
+            console.log("Se acabaron las requests a la API :(")
+            return
+        }
+        spoonacularKey.pop()
         searchRecipesByQuery()
         return
     }
@@ -201,13 +205,17 @@ async function saveData(recipe){
 }
 
 async function getRecipeInformation(id){
-    var data = await fetch('https://api.spoonacular.com/recipes/'+ id +'/information?apiKey='+ spoonacularKey)
+    var data = await fetch('https://api.spoonacular.com/recipes/'+ id +'/information?apiKey='+ spoonacularKey.at(-1))
     .then(response => response.json())
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
     if (data.code == 402) {
-        spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
+        if (spoonacularKey.length == 1) {
+            console.log("Se acabaron las requests a la API :(")
+            return
+        }
+        spoonacularKey.pop()
         newData = getRecipeInformation(id)
         return newData
     }

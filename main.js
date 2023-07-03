@@ -40,7 +40,13 @@ function hideSections(){
     }
 }
 
-async function searchRecipesByQuery(){
+async function searchRecipesByQuery() {
+    //Pantalla de carga y pantalla "sin resultados"
+    const loadingScreen = document.getElementById("search-loading");
+    const noResultsScreen = document.getElementById("no-results");
+    loadingScreen.className = "d-none";
+    noResultsScreen.className = "d-none";
+
     const searchSection = document.getElementById("search-section")
     const previousSearchResults = searchSection.querySelectorAll(".search-result")
     previousSearchResults.forEach(element => {
@@ -49,11 +55,13 @@ async function searchRecipesByQuery(){
     var query = document.getElementById('query-input').value;
     console.log(query)
     //ESTO ANDA
+    loadingScreen.className = "d-flex";
     var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey)
     .then(response => response.json())
     .catch(error => {
         console.error('Error al hacer la solicitud HTTP:', error);
     });
+    loadingScreen.className = "d-none";
     if (data.code == 402) {
         spoonacularKey = "b3d8248260a64af4aa63ffb4b7c2b2e3"
         searchRecipesByQuery()
@@ -81,13 +89,10 @@ async function searchRecipesByQuery(){
                         
     // console.log(lRecipes);
     if (lRecipes.length == 0) {
-        const message = document.createElement("h3")
-        message.className = "search-result";
-        const messageText = document.createTextNode("No se encontraron resultados :(")
-        message.appendChild(messageText)
-        searchSection.appendChild(message)
+        noResultsScreen.className = "d-flex";
         return
     }
+    loadingScreen.className = "d-flex";
     for (let i = 0; i < lRecipes.length; i++){
         // Crear el contenedor principal
         var container = document.createElement('div');
@@ -135,6 +140,7 @@ async function searchRecipesByQuery(){
         // Agregar el contenedor principal al elemento padre
         searchSection.appendChild(container);
     }
+    loadingScreen.className = "d-none";
 }
 
 async function saveData(recipe){

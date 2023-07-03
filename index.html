@@ -40,25 +40,33 @@
                         </div>
                     </section>
                     <section id="search-section" class="content-section" style="display: none;">
-                      <div class="md-searchbox" style="width: 800px; margin: 16px;">
-                        <input  id="query-input" type="text" class="md-searchbox-input" placeholder="Buscar">
-                        <button class="md-searchbox-button" onclick="searchRecipesByQuery()">
-                          <span class="material-symbols-outlined">search</span>
-                        </button>
-                      </div>
-                      <div id="recipes">
+                        <div class="md-searchbox" style="width: 800px; margin: 16px;">
+                            <input id="query-input" type="text" class="md-searchbox-input" placeholder="Buscar">
+                            <button class="md-searchbox-button" onclick="searchRecipesByQuery()">
+                                <span class="material-symbols-outlined">search</span>
+                            </button>
+                        </div>
+                        <div id="recipes">
 
-                          <!--<div style="display: flex; margin: 16px; gap: 8px; width: 800px;">
-                              <img src="./imagen.jpg" alt="Foto" width="160" />
-                              <div style="display: flex; flex-direction: column; justify-content: space-between; width: 100%;">
-                                  <p style="font-size: 1.5rem;">Cannellini Bean and Asparagus Salad with Mushrooms</p>
-                                  <button class="md-searchbox-button-text" style="align-self: end; span">
-                                      <span class="material-symbols-outlined" style="margin-right: 4px;">save</span>
-                                      <span>Guardar</span>
-                                  </button>
-                              </div>
-                          </div>-->
-                      </div>
+                            <!--<div style="display: flex; margin: 16px; gap: 8px; width: 800px;">
+            <img src="./imagen.jpg" alt="Foto" width="160" />
+            <div style="display: flex; flex-direction: column; justify-content: space-between; width: 100%;">
+                <p style="font-size: 1.5rem;">Cannellini Bean and Asparagus Salad with Mushrooms</p>
+                <button class="md-searchbox-button-text" style="align-self: end; span">
+                    <span class="material-symbols-outlined" style="margin-right: 4px;">save</span>
+                    <span>Guardar</span>
+                </button>
+            </div>
+        </div>-->
+                        </div>
+                        <div id="search-loading" class="d-none" style="flex-direction: column; align-items: center;">
+                            <img src="loading.gif" alt="Cargando" width="160" />
+                            <p style="color: darkgray; font-size: 2rem;">Buscando</p>
+                        </div>
+                        <div id="no-results" class="d-none" style="flex-direction: column; align-items: center;">
+                            <span style="color: darkgray; transform: scale(4); margin: 40px;" class="material-symbols-outlined">search_off</span>
+                            <p style="color: darkgray; font-size: 2rem;">No se hallaron resultados para la busqueda</p>
+                        </div>
                     </section>
                     <section id="graph-section" class="content-section" style="display: none;">
                         <div class="grey-card">

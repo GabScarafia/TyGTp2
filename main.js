@@ -100,6 +100,7 @@ async function searchRecipesByQuery() {
         container.style.margin = '16px';
         container.style.gap = '8px';
         container.style.width = '800px';
+        container.className = "search-result";
 
         // Crear la imagen
         var image = document.createElement('img');

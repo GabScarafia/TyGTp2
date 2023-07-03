@@ -1,4 +1,4 @@
-//import { G5Recipe, TypeFood } from "./classes"
+
 var spoonacularKey = "c133c754558c4409918494b340a64248"
 //HACER STRAPIKEY dinamico (OSEA SIEMPRE UN FETCH DE ESTO)
 const strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MzM4OTQ5LCJleHAiOjE2OTA5MzA5NDl9.rquKZ1LK5qIUQfci3-Uvi2qdCB5aDpia5W_rmPfeze8"
@@ -27,7 +27,8 @@ function selectApiOperation(apiItem){
     switch (apiItem){
         case "search":
             break
-        case "recipes":
+        case "graph":
+            makeGraph()
             break
     }
 }
@@ -191,4 +192,22 @@ async function getRecipeInformation(id){
         return TypeFood.vegetarian
     }
     return TypeFood.other
+}
+
+async function makeGraph() {
+    var data = await fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + strapiKey,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }  
+    }).then(response => response.json())
+    var vegan = 0
+    var vegetarian = 0
+    var other = 0
+    var lRecipes = data.data
+    vegan = lRecipes.filter(x => x.attributes.type==="vegan").length
+    vegetarian = lRecipes.filter(x => x.attributes.type==="vegetarian").length
+    other = lRecipes.filter(x => x.attributes.type==="other").length
 }

@@ -1,7 +1,11 @@
 
 var spoonacularKey = "c133c754558c4409918494b340a64248"
-//HACER STRAPIKEY dinamico (OSEA SIEMPRE UN FETCH DE ESTO)
-const strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MzM4OTQ5LCJleHAiOjE2OTA5MzA5NDl9.rquKZ1LK5qIUQfci3-Uvi2qdCB5aDpia5W_rmPfeze8"
+var strapiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg4MzM4OTQ5LCJleHAiOjE2OTA5MzA5NDl9.rquKZ1LK5qIUQfci3-Uvi2qdCB5aDpia5W_rmPfeze8"
+
+
+window.onload = async function() {
+   await getStrapiKey()
+};
 
 class G5Recipe {
     constructor(recipeData) {
@@ -20,6 +24,22 @@ const TypeFood = {
     other: "other",
 }
 
+async function getStrapiKey(){
+    const elBody =new Object({
+        identifier: "api-user@example.com",
+        password: "123456"
+    })
+    var query = await fetch('https://gestionweb.frlp.utn.edu.ar/api/auth/local',{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify(elBody)
+       
+    }).then(response => response.json())
+    strapiKey = query.jwt
+}
 
 function selectApiOperation(apiItem){
     hideSections()

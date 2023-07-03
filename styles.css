@@ -128,8 +128,7 @@ footer{
     flex: 1;
     /* margin-top: 16px; */
     padding: 16px;
-    background-color: #E7E7E7;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
 }
 
 .footer-text{

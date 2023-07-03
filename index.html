@@ -37,12 +37,12 @@
                     <section id="home-section" class="content-section">
                         <div style="display: flex; gap: 40px;">
                             <img src="utn.png" alt="UTN" width="160" />
-                            <p style="font-size: 1.5rem; line-height: 40px;"><strong>Trabajo realizado por</strong><br /><br />Matías Vladimiro Chocobar<br />Augusto Balbino Gonzales<br />Gabriel Hugo Scarafia<br /></p>
+                            <p style="font-size: 1.5rem; line-height: 40px;"><strong>Trabajo realizado por</strong><br /><br />Matías Vladimiro Chocobar<br />Augusto Balbino González<br />Gabriel Hugo Scarafia<br /></p>
                         </div>
                     </section>
                     <section id="search-section" class="content-section" style="display: none;">
                         <div class="md-searchbox" style="width: 800px; margin: 16px;">
-                            <input id="query-input" type="text" class="md-searchbox-input" placeholder="Buscar">
+                            <input id="query-input" type="text" class="md-searchbox-input" placeholder="Buscar" onkeypress="handleKeyPress(event)">
                             <button class="md-searchbox-button" onclick="searchRecipesByQuery()">
                                 <span class="material-symbols-outlined">search</span>
                             </button>

@@ -48,7 +48,7 @@ function selectApiOperation(apiItem){
         case "search":
             break
         case "graph":
-            makeGraph()
+            createGraph()
             break
     }
 }
@@ -221,7 +221,7 @@ async function getRecipeInformation(id){
     return TypeFood.other
 }
 
-async function makeGraph() {
+async function createGraph() {
     var data = await fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes', {
         method: 'GET',
         headers: {
@@ -230,11 +230,28 @@ async function makeGraph() {
             'Content-Type': 'application/json',
         }  
     }).then(response => response.json())
-    var vegan = 0
-    var vegetarian = 0
-    var other = 0
     var lRecipes = data.data
-    vegan = lRecipes.filter(x => x.attributes.type==="vegan").length
-    vegetarian = lRecipes.filter(x => x.attributes.type==="vegetarian").length
-    other = lRecipes.filter(x => x.attributes.type==="other").length
+    var vegan = lRecipes.filter(x => x.attributes.type==="vegan").length
+    var vegetarian = lRecipes.filter(x => x.attributes.type==="vegetarian").length
+    var other = lRecipes.filter(x => x.attributes.type==="other").length
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: [
+                'Vegan',
+                'Vegetarian',
+                'Other'
+              ],
+              datasets: [{
+                label: 'Recetas por tipo',
+                data: [vegan, vegetarian, other],
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+              }]
+        },
+      });
 }

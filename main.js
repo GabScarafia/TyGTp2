@@ -20,7 +20,6 @@ class G5Recipe {
 const TypeFood = {
     vegan: "vegan",
     vegetarian: "vegetarian",
-    //normal: "normal" ahre forro
     other: "other",
 }
 
@@ -67,7 +66,6 @@ function handleKeyPress(event) {
   }
 
 async function searchRecipesByQuery() {
-    //Pantalla de carga y pantalla "sin resultados"
     const loadingScreen = document.getElementById("search-loading");
     const noResultsScreen = document.getElementById("no-results");
     const noRequestsScreen = document.getElementById("no-requests");
@@ -82,7 +80,6 @@ async function searchRecipesByQuery() {
     })
     var query = document.getElementById('query-input').value;
     console.log(query)
-    //ESTO ANDA
     loadingScreen.className = "d-flex";
     var data = await fetch('https://api.spoonacular.com/recipes/complexSearch?query='+ query +'&apiKey='+ spoonacularKey.at(-1))
     .then(response => response.json())
@@ -106,28 +103,12 @@ async function searchRecipesByQuery() {
         recipe.type = newData
     } 
     const lRecipes = data.results.map(item => new G5Recipe(item));
-    //ESTO ES LA PRUEBA
-    // const lRecipes = [{
-    //                     "id":782585,
-    //                     "title":"Cannellini Bean and Asparagus Salad with Mushrooms",
-    //                     "image":"https://spoonacular.com/recipeImages/782585-312x231.jpg",
-    //                     "imageType":"jpg"
-    //                     },
-    //                     {
-    //                         "id":716426,
-    //                         "title":"Cauliflower, Brown Rice, and Vegetable Fried Rice",
-    //                         "image":"https://spoonacular.com/recipeImages/716426-312x231.jpg",
-    //                         "imageType":"jpg"
-    //                     }]
-                        
-    // console.log(lRecipes);
     if (lRecipes.length == 0) {
         noResultsScreen.className = "d-flex";
         return
     }
     loadingScreen.className = "d-flex";
     for (let i = 0; i < lRecipes.length; i++){
-        // Crear el contenedor principal
         var container = document.createElement('div');
         container.style.display = 'flex';
         container.style.margin = '16px';
@@ -135,27 +116,23 @@ async function searchRecipesByQuery() {
         container.style.width = '800px';
         container.className = "search-result";
 
-        // Crear la imagen
         var image = document.createElement('img');
         image.src = lRecipes[i].image;
         image.alt = 'Foto';
         image.width = '160';
         container.appendChild(image);
 
-        // Crear el contenedor de texto y bot�n
         var textContainer = document.createElement('div');
         textContainer.style.display = 'flex';
         textContainer.style.flexDirection = 'column';
         textContainer.style.justifyContent = 'space-between';
         textContainer.style.width = '100%';
 
-        // Crear el p�rrafo
         var paragraph = document.createElement('p');
         paragraph.style.fontSize = '1.5rem';
         paragraph.textContent = lRecipes[i].title;
         textContainer.appendChild(paragraph);
 
-        // Crear el bot�n
         var button = document.createElement('button');
         button.id = lRecipes[i].id;
         button.className = 'md-searchbox-button-text';
@@ -168,10 +145,8 @@ async function searchRecipesByQuery() {
           };
         textContainer.appendChild(button);
 
-        // Agregar el contenedor de texto y bot�n al contenedor principal
         container.appendChild(textContainer);
 
-        // Agregar el contenedor principal al elemento padre
         searchSection.appendChild(container);
     }
     loadingScreen.className = "d-none";
@@ -191,13 +166,11 @@ async function saveData(recipe){
     if(query.data){
     }
     else{
-        //TODO ESTO ES SI NO EXISTE EN EL STRAPI
         recipe.type = await getRecipeInformation(recipe.id)
         const elBody ={
             "data" : recipe
         } 
         const bodyJson = JSON.stringify(elBody);
-        // console.log(json);
         fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes', {
             method: 'POST',
             headers: {
@@ -238,8 +211,8 @@ async function getRecipeInformation(id){
     return TypeFood.other
 }
 
-async function createGraph() {
-    var data = await fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes', {
+async function getCountType(type){
+    var data = await fetch('https://gestionweb.frlp.utn.edu.ar/api/g5-recipes?filters[type][$eq]='+type, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + strapiKey,
@@ -247,10 +220,16 @@ async function createGraph() {
             'Content-Type': 'application/json',
         }  
     }).then(response => response.json())
-    var lRecipes = data.data
-    var vegan = lRecipes.filter(x => x.attributes.type==="vegan").length
-    var vegetarian = lRecipes.filter(x => x.attributes.type==="vegetarian").length
-    var other = lRecipes.filter(x => x.attributes.type==="other").length
+    var total = data.meta.pagination.total
+    return total
+}
+async function createGraph() {
+   
+    var vegan = await getCountType("vegan")
+    var vegetarian = await getCountType("vegetarian")
+    var other = await getCountType("other")
+
+    console.log("vegan: "+ vegan +"vegetarian:"+vegetarian+"other:"+other )
     new Chart("myChart", {
         type: "pie",
         data: {
